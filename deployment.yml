@@ -1,8 +1,6 @@
 template-file-path: ./iam-lab-cloudformation.yaml
-capabilities:
-  - CAPABILITY_NAMED_IAM
+stack-name: iam-cloudformation-stack
+parameters: {}
 tags:
-  - key: Lab
-    value: IAM-Automation
-  - key: ManagedBy
-    value: GitSync
+  Project: iam-cloudformation-lab
+  ManagedBy: GitSync
