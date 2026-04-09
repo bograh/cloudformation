@@ -1,0 +1,88 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: IAM Resources Lab - Users, Groups, Policies, Secrets
+
+Resources:
+  UserTempPassword:
+    Type: AWS::SecretsManager::Secret
+    Properties:
+      Name: iam-user-temp-password
+      Description: Temporary password for IAM users
+      GenerateSecretString:
+        SecretStringTemplate: '{"username":"admin"}'
+        GenerateStringKey: "password"
+        PasswordLength: 12
+        ExcludeCharacters: '"@/\'
+
+  S3Group:
+    Type: AWS::IAM::Group
+    Properties:
+      GroupName: S3-Group
+
+  EC2Group:
+    Type: AWS::IAM::Group
+    Properties:
+      GroupName: EC2-Group
+
+  S3Policy:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: S3ListBucketsPolicy
+      Groups:
+        - !Ref S3Group
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Action:
+              - s3:ListAllMyBuckets
+            Resource: "*"
+
+  EC2Policy:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: EC2AccessPolicy
+      Groups:
+        - !Ref EC2Group
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Action:
+              - ec2:DescribeInstances
+              - ec2:RunInstances
+            Resource: "*"
+
+  EC2User1:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: ec2-user1
+      Groups:
+        - !Ref EC2Group
+      LoginProfile:
+        Password: "{{resolve:secretsmanager:iam-user-temp-password:SecretString:password}}"
+        PasswordResetRequired: true
+
+  EC2User2:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: ec2-user2
+      Groups:
+        - !Ref EC2Group
+      LoginProfile:
+        Password: "{{resolve:secretsmanager:iam-user-temp-password:SecretString:password}}"
+        PasswordResetRequired: true
+
+  S3User:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: s3-user
+      Groups:
+        - !Ref S3Group
+      LoginProfile:
+        Password: "{{resolve:secretsmanager:iam-user-temp-password:SecretString:password}}"
+        PasswordResetRequired: true
+
+Outputs:
+  LoginURL:
+    Description: AWS Console Login URL
+    Value: !Sub "https://${AWS::AccountId}.signin.aws.amazon.com/console"
