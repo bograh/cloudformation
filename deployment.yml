@@ -1,7 +1,6 @@
 template-file-path: ./iam-lab-cloudformation.yaml
-parameters:
-  - parameter-key: EnvironmentName
-    parameter-value: iam-lab
+capabilities:
+  - CAPABILITY_NAMED_IAM
 tags:
   - key: Lab
     value: IAM-Automation
