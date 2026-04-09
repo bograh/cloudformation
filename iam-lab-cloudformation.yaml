@@ -12,16 +12,22 @@ Resources:
         GenerateStringKey: "password"
         PasswordLength: 12
         ExcludeCharacters: '"@/\'
+        IncludeSpace: false
+        RequireEachIncludedType: true
 
   S3Group:
     Type: AWS::IAM::Group
     Properties:
       GroupName: S3-Group
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/IAMUserChangePassword
 
   EC2Group:
     Type: AWS::IAM::Group
     Properties:
       GroupName: EC2-Group
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/IAMUserChangePassword
 
   S3Policy:
     Type: AWS::IAM::Policy
