@@ -8,7 +8,7 @@ Resources:
       Name: iam-user-temp-pass
       Description: Generated temporary password for IAM users
       GenerateSecretString:
-        SecretStringTemplate: '{"username":"admin"}'
+        SecretStringTemplate: '{"username":"temp-user"}'
         GenerateStringKey: "password"
         PasswordLength: 12
         ExcludeCharacters: '"@/\\'
