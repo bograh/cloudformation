@@ -15,7 +15,7 @@ This lab demonstrates how to automate IAM resource creation with AWS CloudFormat
 
 Replace this with your public or private GitHub repository URL before submission:
 
-`https://github.com/<your-username>/<your-repo-name>`
+`https://github.com/bograh/<your-repo-name>`
 
 ## Repository Structure
 
