@@ -2,7 +2,7 @@ AWSTemplateFormatVersion: "2010-09-09"
 Description: IAM Resources Lab - Users, Groups, Policies, Secrets
 
 Resources:
-  UserTempPassword:
+  UserTemporaryPassword:
     Type: AWS::SecretsManager::Secret
     Properties:
       Name: iam-user-temp-password
