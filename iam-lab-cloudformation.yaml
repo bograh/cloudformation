@@ -11,8 +11,7 @@ Resources:
         SecretStringTemplate: '{"username":"admin"}'
         GenerateStringKey: "password"
         PasswordLength: 12
-        ExcludeCharacters: '"@/\'
-        IncludeSpace: false
+        ExcludeCharacters: '"@/\\'        IncludeSpace: false
         RequireEachIncludedType: true
 
   S3Group:
