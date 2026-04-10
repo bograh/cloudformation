@@ -6,7 +6,7 @@ Resources:
     Type: AWS::SecretsManager::Secret
     Properties:
       Name: iam-user-temp-password
-      Description: Temporary password for IAM users
+      Description: Generated temporary password for IAM users
       GenerateSecretString:
         SecretStringTemplate: '{"username":"admin"}'
         GenerateStringKey: "password"
