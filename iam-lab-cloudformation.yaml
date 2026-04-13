@@ -88,6 +88,20 @@ Resources:
         Password: "{{resolve:secretsmanager:iam-user-temp-pass:SecretString:password}}"
         PasswordResetRequired: true
 
+  EC2User2DenyRunInstances:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: EC2User2DenyRunInstances
+      Users:
+        - !Ref EC2User2
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Deny
+            Action:
+              - ec2:RunInstances
+            Resource: "*"
+
   S3User:
     Type: AWS::IAM::User
     Properties:
