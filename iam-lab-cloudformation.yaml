@@ -5,7 +5,7 @@ Resources:
   UserTempPassword:
     Type: AWS::SecretsManager::Secret
     Properties:
-      Name: iam-user-temp-pass
+      Name: iam-user-temp-password
       Description: Generated temporary password for IAM users
       GenerateSecretString:
         SecretStringTemplate: '{"username":"temp-user"}'
@@ -75,7 +75,7 @@ Resources:
       Groups:
         - !Ref EC2Group
       LoginProfile:
-        Password: "{{resolve:secretsmanager:iam-user-temp-pass:SecretString:password}}"
+        Password: "{{resolve:secretsmanager:iam-user-temp-password:SecretString:password}}"
         PasswordResetRequired: true
 
   EC2User2:
@@ -85,7 +85,7 @@ Resources:
       Groups:
         - !Ref EC2Group
       LoginProfile:
-        Password: "{{resolve:secretsmanager:iam-user-temp-pass:SecretString:password}}"
+        Password: "{{resolve:secretsmanager:iam-user-temp-password:SecretString:password}}"
         PasswordResetRequired: true
 
   EC2User2DenyRunInstances:
@@ -109,7 +109,7 @@ Resources:
       Groups:
         - !Ref S3Group
       LoginProfile:
-        Password: "{{resolve:secretsmanager:iam-user-temp-pass:SecretString:password}}"
+        Password: "{{resolve:secretsmanager:iam-user-temp-password:SecretString:password}}"
         PasswordResetRequired: true
 
 Outputs:
